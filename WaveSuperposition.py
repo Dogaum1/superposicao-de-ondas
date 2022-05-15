@@ -281,5 +281,5 @@ class Graph:
             self.animation.pause()
         self.paused = not self.paused
 
-
-Graph()
+if __name__ == "__main__":
+    Graph()
