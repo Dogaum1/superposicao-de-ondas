@@ -52,8 +52,8 @@ class SubPlot(UltraPlot):
         self.omega = omega
         self.subplot.set_ylim(
             [
-                -self.amplitude - Info().graph_adjust,
-                self.amplitude + Info().graph_adjust,
+                -abs(self.amplitude) - Info().graph_adjust,
+                abs(self.amplitude) + Info().graph_adjust,
             ]
         )
 
@@ -88,7 +88,7 @@ class ResultPlot(UltraPlot):
         self.y_calc = self.plot_1.line.get_ydata() + self.plot_2.line.get_ydata()
         (self.line,) = self.subplot.plot(Info().time, self.y_calc)
         self.lambda_ = 0
-        self.amplitude = self.plot_1.amplitude + self.plot_2.amplitude
+        self.amplitude = abs(self.plot_1.amplitude) + abs(self.plot_2.amplitude)
         self.subplot.set_ylim(
             [
                 -self.amplitude - Info().graph_adjust,
@@ -98,7 +98,7 @@ class ResultPlot(UltraPlot):
 
     # * Atualiza os valores do calculo da onda somando os valores da 1ª onda com os valores da 2º onda
     def update_values(self):
-        self.amplitude = self.plot_1.amplitude + self.plot_2.amplitude
+        self.amplitude = abs(self.plot_1.amplitude) + abs(self.plot_2.amplitude)
         self.subplot.set_ylim(
             [
                 -self.amplitude - Info().graph_adjust,
@@ -147,9 +147,12 @@ class Input:
         # * Verifica se lambda é menor que 0                     
         if float(self.lambda_text.text) < 0:
             tkinter.messagebox.showerror("Erro!", "Cumprimento de onda não pode ser menor que 0!")
+            self.lambda_text.set_val(self.plot.lambda_)
         # * Verifica se omega é menor que 0 
         elif float(self.omega_text.text) < 0:
             tkinter.messagebox.showerror("Erro!", "Frequência angular não pode ser menor que 0!")
+            self.omega_text.set_val(self.plot.omega)
+            
         else:
             self.plot.update_values(
                 float(self.amplitude_text.text),
