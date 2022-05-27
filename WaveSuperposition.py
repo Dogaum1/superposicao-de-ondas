@@ -135,7 +135,7 @@ class Input:
         self.plot = plot
         # * Gráfico resultante (3º gráfico)                                  
         self.resultPlot = resultPlot
-         # * Botões para a escolha do tipo de onda                      
+        # * Botões para a escolha do tipo de onda                      
         self.radio_buttons = radio_buttons
         # * Relaciona o botão de atualizar a base de cálculo da onda com a função de atualizar a base da cálculo da onda               
         self.button.on_clicked(self.button_action)
